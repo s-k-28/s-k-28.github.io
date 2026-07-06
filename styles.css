@@ -111,3 +111,5 @@ body.lb-lock{overflow:hidden}
   #card-grid > [data-category] a.block:hover{transform:none}
   #card-grid > [data-category] a.block:hover img{transform:none}
 }
+
+.lb-overlay[hidden]{display:none !important;}

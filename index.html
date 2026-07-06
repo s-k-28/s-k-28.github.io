@@ -25,11 +25,11 @@
 <div class="w-full flex flex-col items-center relative z-10">
 <nav class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
 <div class="max-w-3xl mx-auto flex items-center justify-between px-4 py-3">
-<div class="flex items-center gap-1">
-<button class="px-3 py-1 rounded-full text-sm transition-colors duration-200 bg-foreground text-background font-medium">about</button>
-<button class="px-3 py-1 rounded-full text-sm transition-colors duration-200 text-muted-foreground hover:text-foreground">experiences</button>
-<button class="px-3 py-1 rounded-full text-sm transition-colors duration-200 text-muted-foreground hover:text-foreground">research</button>
-<button class="px-3 py-1 rounded-full text-sm transition-colors duration-200 text-muted-foreground hover:text-foreground">gallery</button>
+<div class="flex items-center gap-1" id="nav-tabs">
+<button type="button" data-nav="about" aria-current="page" class="px-3 py-1 rounded-full text-sm transition-colors duration-200 bg-foreground text-background font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">about</button>
+<button type="button" data-nav="experiences" class="px-3 py-1 rounded-full text-sm transition-colors duration-200 text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">experiences</button>
+<button type="button" data-nav="research" class="px-3 py-1 rounded-full text-sm transition-colors duration-200 text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">research</button>
+<button type="button" data-nav="gallery" class="px-3 py-1 rounded-full text-sm transition-colors duration-200 text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">gallery</button>
 </div>
 <button id="theme-toggle" type="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-8 w-8">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
@@ -59,12 +59,20 @@
 <div class="mb-4">
 <h2 class="mb-2 font-bold text-sm">some cool things i've done:</h2>
 <ul class="list-none space-y-1 text-sm">
-<li class="tight-list-item">co-authoring a quant finance paper with <a href="#" class="link-bloomberg">Prof. Riccardo Rebonato</a> (ex head of Rates and FX Analytics at PIMCO), now under review at The Journal of Fixed Income</li>
+<li class="tight-list-item">co-authoring two quant finance papers with <a href="assets/papers/kodithyala-rebonato-iv-skew.pdf" target="_blank" rel="noopener noreferrer" class="link-bloomberg">Prof. Riccardo Rebonato</a> (ex head of Rates and FX Analytics at PIMCO): one on volatility-skew predictability, now under review at The Journal of Fixed Income, and one on volatility-managing US Treasuries with the MOVE index</li>
 <li class="tight-list-item">won the AICOO Hackathon with <a href="https://github.com/s-k-28/relay" target="_blank" rel="noopener noreferrer" class="link-hackathon">Relay</a>, 1st of ~100 hackers, $10,000 in compute credits</li>
 <li class="tight-list-item">won the InsForge Hackathon (a YC-backed company) with <a href="https://github.com/s-k-28/hive" target="_blank" rel="noopener noreferrer" class="link-preseed">HIVE</a>, 1st of 35</li>
 <li class="tight-list-item">built <a href="#" class="link-hackclub">Radia</a>, an AI skin-analysis iOS app, now live on TestFlight</li>
 <li class="tight-list-item">founded <a href="https://github.com/s-k-28/euphoria-quest-forge" target="_blank" rel="noopener noreferrer" class="link-teenbuilders">Euphoria</a>, investing education for teens, near 1,000 on the waitlist</li>
 <li class="tight-list-item">mentored by <a href="#" class="link-green">Larry Connors</a> (creator of the 2-period RSI model) on quant strategy</li>
+</ul>
+</div>
+<div class="mb-4">
+<h2 class="mb-2 font-bold text-sm">papers:</h2>
+<ul class="list-none space-y-1 text-sm">
+<li class="tight-list-item"><a href="assets/papers/kodithyala-rebonato-iv-skew.pdf" target="_blank" rel="noopener noreferrer" class="link-blue hover-dark-1">volatility skew shifts as predictors of short-term S&amp;P 500 returns</a> (Kodithyala and Rebonato, 2026), under review at The Journal of Fixed Income</li>
+<li class="tight-list-item"><a href="assets/papers/rebonato-kodithyala-move-treasuries.pdf" target="_blank" rel="noopener noreferrer" class="link-blue hover-dark-1">can one volatility-manage fixed-income portfolios?</a> (Rebonato and Kodithyala, EDHEC Business School, 2026)</li>
+<li class="tight-list-item"><a href="assets/papers/lantern-moonshot.pdf" target="_blank" rel="noopener noreferrer" class="link-blue hover-dark-1">Lantern: a moonshot paper</a> (the endangered-language tutor writeup)</li>
 </ul>
 </div>
 <div class="space-y-4"></div>
@@ -157,15 +165,39 @@
 </div>
 </div>
 
-<div class="flex flex-col group transition-colors" data-category="research" data-text="iv skew predictability under review volatility skew shifts as predictors of short-term sp 500 returns co-authored with prof rebonato">
-<a href="https://github.com/s-k-28/iv-skew-prediction" target="_blank" rel="noopener noreferrer" class="relative mb-3 overflow-hidden aspect-[16/10] rounded cursor-pointer block bg-violet-600">
-<img src="assets/iv-skew.png" alt="IV Skew Predictability repository preview" loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover" onerror="this.style.display='none'" />
+<div class="flex flex-col group transition-colors" data-category="research" data-text="iv skew predictability under review volatility skew shifts as predictors of short-term sp 500 returns kodithyala and rebonato journal of fixed income paper pdf">
+<a href="assets/papers/kodithyala-rebonato-iv-skew.pdf" target="_blank" rel="noopener noreferrer" class="relative mb-3 overflow-hidden aspect-[16/10] rounded cursor-pointer block bg-violet-600">
+<img src="assets/iv-skew.png" alt="Volatility skew paper preview" loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover" onerror="this.style.display='none'" />
 <span class="absolute top-2 right-2 text-[10px] font-medium px-2 py-0.5 rounded link-bloomberg">under review</span>
 </a>
 <div class="flex flex-col">
-<h3 class="text-sm font-medium leading-tight cursor-pointer hover:underline mb-1"><a href="https://github.com/s-k-28/iv-skew-prediction" target="_blank" rel="noopener noreferrer">IV Skew Predictability</a></h3>
+<h3 class="text-sm font-medium leading-tight cursor-pointer hover:underline mb-1"><a href="assets/papers/kodithyala-rebonato-iv-skew.pdf" target="_blank" rel="noopener noreferrer">Volatility Skew Predictability</a></h3>
 <div class="mb-1 text-[11px]"><span class="text-muted-foreground">research</span></div>
-<p class="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">volatility skew shifts as predictors of short-term s&amp;p 500 returns. co-authored with prof. rebonato.</p>
+<p class="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">volatility skew shifts as predictors of short-term s&amp;p 500 returns. Kodithyala and Rebonato, under review at The Journal of Fixed Income.</p>
+</div>
+</div>
+
+<div class="flex flex-col group transition-colors" data-category="research" data-text="move treasuries can one volatility-manage fixed-income portfolios rebonato and kodithyala edhec moreira muir volatility-managed treasuries positive alpha higher sharpe paper pdf">
+<a href="assets/papers/rebonato-kodithyala-move-treasuries.pdf" target="_blank" rel="noopener noreferrer" class="relative mb-3 overflow-hidden aspect-[16/10] rounded cursor-pointer block paper-thumb paper-thumb-move">
+<span class="paper-thumb-title">Can One Volatility-Manage Fixed-Income Portfolios?</span>
+<span class="absolute top-2 right-2 text-[10px] font-medium px-2 py-0.5 rounded link-bloomberg">with Rebonato at EDHEC</span>
+</a>
+<div class="flex flex-col">
+<h3 class="text-sm font-medium leading-tight cursor-pointer hover:underline mb-1"><a href="assets/papers/rebonato-kodithyala-move-treasuries.pdf" target="_blank" rel="noopener noreferrer">Volatility-Managing Treasuries</a></h3>
+<div class="mb-1 text-[11px]"><span class="text-muted-foreground">research</span></div>
+<p class="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">extends Moreira-Muir volatility-managed portfolios to US Treasuries using the MOVE index, recovering positive alpha and higher sharpe ratios. Rebonato and Kodithyala, EDHEC.</p>
+</div>
+</div>
+
+<div class="flex flex-col group transition-colors" data-category="projects" data-text="lantern moonshot paper endangered language tutor writeup duolingo for dying languages pdf">
+<a href="assets/papers/lantern-moonshot.pdf" target="_blank" rel="noopener noreferrer" class="relative mb-3 overflow-hidden aspect-[16/10] rounded cursor-pointer block paper-thumb paper-thumb-lantern">
+<span class="paper-thumb-title">Lantern: a moonshot paper</span>
+<span class="absolute top-2 right-2 text-[10px] font-medium px-2 py-0.5 rounded link-teal">moonshot</span>
+</a>
+<div class="flex flex-col">
+<h3 class="text-sm font-medium leading-tight cursor-pointer hover:underline mb-1"><a href="assets/papers/lantern-moonshot.pdf" target="_blank" rel="noopener noreferrer">Lantern (paper)</a></h3>
+<div class="mb-1 text-[11px]"><span class="text-muted-foreground">project</span></div>
+<p class="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">the writeup behind the endangered-language tutor: a guardrail that refuses any word a real speaker never said.</p>
 </div>
 </div>
 

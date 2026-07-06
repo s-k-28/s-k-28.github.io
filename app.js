@@ -185,4 +185,145 @@
   }
 
   apply();
+
+  // Graceful image paint: fade each image in once it has loaded and clear the
+  // skeleton shimmer on its container. Handles images cached before JS runs.
+  var fadeImgs = document.querySelectorAll("img.img-fade");
+  fadeImgs.forEach(function (img) {
+    function done() {
+      img.classList.add("is-loaded");
+      var host = img.closest(".img-skeleton");
+      if (host) host.classList.add("is-loaded");
+    }
+    if (img.complete && img.naturalWidth > 0) {
+      done();
+    } else {
+      img.addEventListener("load", done, { once: true });
+      img.addEventListener(
+        "error",
+        function () {
+          var host = img.closest(".img-skeleton");
+          if (host) host.classList.add("is-loaded");
+        },
+        { once: true }
+      );
+    }
+  });
+
+  // Lightweight, dependency-free gallery lightbox. Clicking a gallery image
+  // opens it enlarged; the tile's outbound link stays reachable via the caption.
+  var galleryTiles = document.querySelectorAll("#gallery-view .gallery-tile");
+  if (galleryTiles.length) {
+    var overlay = document.createElement("div");
+    overlay.className = "lb-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Image viewer");
+    overlay.hidden = true;
+    overlay.innerHTML =
+      '<div class="lb-figure">' +
+      '<button type="button" class="lb-close" aria-label="Close image viewer">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>' +
+      "</button>" +
+      '<img class="lb-img" alt="" />' +
+      '<p class="lb-caption"></p>' +
+      "</div>";
+    document.body.appendChild(overlay);
+
+    var lbImg = overlay.querySelector(".lb-img");
+    var lbCaption = overlay.querySelector(".lb-caption");
+    var lbClose = overlay.querySelector(".lb-close");
+    var lastFocused = null;
+
+    function focusables() {
+      return overlay.querySelectorAll(
+        'button, [href], [tabindex]:not([tabindex="-1"])'
+      );
+    }
+
+    function openLightbox(src, alt, caption) {
+      lastFocused = document.activeElement;
+      lbImg.setAttribute("src", src);
+      lbImg.setAttribute("alt", alt || "");
+      lbCaption.textContent = caption || "";
+      overlay.hidden = false;
+      document.body.classList.add("lb-lock");
+      // Force reflow so the opacity transition runs.
+      void overlay.offsetWidth;
+      overlay.classList.add("is-open");
+      lbClose.focus();
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove("is-open");
+      document.body.classList.remove("lb-lock");
+      var finish = function () {
+        overlay.hidden = true;
+        lbImg.removeAttribute("src");
+      };
+      if (reduceMotion()) {
+        finish();
+      } else {
+        window.setTimeout(finish, 220);
+      }
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus();
+      }
+    }
+
+    galleryTiles.forEach(function (tile) {
+      var img = tile.querySelector(".gallery-img");
+      if (!img) return;
+      var nameEl = tile.querySelector(".gallery-name");
+      var tagEl = tile.querySelector(".gallery-tag");
+      var caption = [
+        nameEl ? nameEl.textContent : "",
+        tagEl ? tagEl.textContent : ""
+      ]
+        .filter(Boolean)
+        .join(" · ");
+      // Make the image itself the lightbox trigger without breaking the link.
+      img.style.cursor = "zoom-in";
+      img.setAttribute("role", "button");
+      img.setAttribute("tabindex", "0");
+      img.setAttribute("aria-label", "Open " + (nameEl ? nameEl.textContent : "image") + " enlarged");
+
+      function trigger(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openLightbox(img.getAttribute("src"), img.getAttribute("alt"), caption);
+      }
+      img.addEventListener("click", trigger);
+      img.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+          trigger(e);
+        }
+      });
+    });
+
+    lbClose.addEventListener("click", closeLightbox);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeLightbox();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (overlay.hidden) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeLightbox();
+      } else if (e.key === "Tab") {
+        // Focus trap.
+        var items = focusables();
+        if (!items.length) return;
+        var first = items[0];
+        var last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
 })();

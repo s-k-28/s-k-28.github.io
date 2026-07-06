@@ -87,30 +87,34 @@
   var gridView = document.getElementById("grid-view");
   var researchView = document.getElementById("research-view");
   var galleryView = document.getElementById("gallery-view");
+  var experiencesView = document.getElementById("experiences-view");
 
   // nav value -> filter applied to the card grid (used only in grid views).
   var NAV_FILTER = {
     about: "everything",
-    experiences: "work",
+    experiences: "everything",
     research: "research",
     gallery: "everything"
   };
 
-  // Show one of the three views. "research" and "gallery" reveal their own
-  // sections and hide the plain grid; everything else shows the grid.
+  // Show one of the nav views. "research", "gallery", and "experiences" reveal
+  // their own sections and hide the plain grid; everything else shows the grid.
   function setView(nav) {
     var showResearch = nav === "research";
     var showGallery = nav === "gallery";
+    var showExperiences = nav === "experiences";
     if (researchView) researchView.hidden = !showResearch;
     if (galleryView) galleryView.hidden = !showGallery;
-    if (gridView) gridView.hidden = showResearch || showGallery;
+    if (experiencesView) experiencesView.hidden = !showExperiences;
+    if (gridView) gridView.hidden = showResearch || showGallery || showExperiences;
   }
 
   // Reveal the plain card grid and clear any active nav tab. Used when a filter
-  // pill is clicked while the research or gallery view is open.
+  // pill is clicked while another view is open.
   function showGridView() {
     if (researchView) researchView.hidden = true;
     if (galleryView) galleryView.hidden = true;
+    if (experiencesView) experiencesView.hidden = true;
     if (gridView) gridView.hidden = false;
     navTabs.forEach(function (t) {
       t.classList.remove("bg-foreground", "text-background", "font-medium");
@@ -156,6 +160,8 @@
             ? researchView
             : nav === "gallery"
             ? galleryView
+            : nav === "experiences"
+            ? experiencesView
             : grid;
         if (target) {
           target.scrollIntoView({

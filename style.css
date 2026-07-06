@@ -80,7 +80,48 @@ a { color: inherit; }
   color: var(--ink-dim);
   transition: color 0.2s ease;
 }
+.nav-links a {
+  position: relative;
+  padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: right 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
 .nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after,
+.nav-links a.active::after { right: 0; }
+.nav-links a.active { color: var(--ink); }
+
+/* Scroll progress */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 20;
+  pointer-events: none;
+}
+.scroll-progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent), rgba(217, 164, 65, 0.35));
+  box-shadow: 0 0 8px rgba(217, 164, 65, 0.5);
+}
+
+/* Focus states */
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
 
 /* Hero */
 .hero {
@@ -185,6 +226,22 @@ a { color: inherit; }
 }
 .research-main p + p { margin-top: 1rem; }
 .research-main > p:not(.research-lede) { color: var(--ink-dim); max-width: 38rem; }
+.research-finding {
+  margin-top: 1.5rem !important;
+  padding: 1.1rem 1.25rem;
+  background: var(--bg-raise);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-dim) !important;
+  font-size: 0.95rem;
+  max-width: 38rem;
+}
+.finding-num {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  color: var(--accent);
+  margin-right: 0.4rem;
+}
 .research-status {
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -257,16 +314,30 @@ a { color: inherit; }
   border: 1px solid var(--line);
 }
 .project {
+  position: relative;
   background: var(--bg);
   padding: 1.75rem 1.5rem 1.5rem;
   text-decoration: none;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  min-height: 13rem;
-  transition: background 0.25s ease;
+  gap: 0.55rem;
+  min-height: 15rem;
+  transition: background 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--accent);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .project:hover { background: var(--bg-raise); }
+.project:hover::after,
+.project:focus-visible::after { transform: scaleX(1); }
 .project-idx {
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -284,6 +355,35 @@ a { color: inherit; }
   color: var(--ink-dim);
   font-size: 0.9rem;
   flex-grow: 1;
+}
+.project-tags {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+}
+.tag-sep { color: var(--ink-faint); margin: 0 0.4rem; }
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.project-award,
+.project-status-tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+.project-award {
+  color: var(--accent);
+  border: 1px solid rgba(217, 164, 65, 0.35);
+}
+.project-status-tag {
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
 }
 .project-link {
   font-family: var(--mono);

@@ -8,12 +8,18 @@
   <meta property="og:title" content="Siddartha Kodithyala">
   <meta property="og:description" content="16-year-old quant researcher and founder. Trading systems, AI products, published research.">
   <meta property="og:url" content="https://s-k-28.github.io">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0d0e10">
+  <link rel="canonical" href="https://s-k-28.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-bar"></span></div>
 
   <nav class="nav">
     <a href="#top" class="nav-name">S. Kodithyala</a>
@@ -54,6 +60,7 @@
       <div class="research-main reveal">
         <p class="research-lede">Volatility skew shifts as predictors of short-term S&amp;P 500 returns.</p>
         <p>I am co-authoring a quantitative finance paper with Prof. Riccardo Rebonato of EDHEC Business School, former Head of Rates &amp; FX Analytics at PIMCO. The paper examines whether shifts in the volatility skew carry predictive information for short-term S&amp;P 500 returns.</p>
+        <p class="research-finding"><span class="finding-num">-17.63 bps</span> top-minus-bottom skew quintile spread, with a bootstrap confidence interval that excludes zero. The signal is small, but it is there, and it holds up.</p>
         <p class="research-status"><span class="status-dot"></span>Under review at The Journal of Fixed Income.</p>
       </div>
       <aside class="research-side reveal">
@@ -64,6 +71,8 @@
           <dd>Head of Rates &amp; FX Analytics, PIMCO</dd>
           <dt>Subject</dt>
           <dd>Options-implied volatility skew, equity return prediction</dd>
+          <dt>Key result</dt>
+          <dd>-17.63 bps quintile spread, bootstrap CI excludes zero</dd>
           <dt>Venue</dt>
           <dd>The Journal of Fixed Income</dd>
         </dl>
@@ -103,7 +112,7 @@
         <span class="win-rank">HM</span>
         <div class="win-body">
           <h3>Steminate Hacks</h3>
-          <p>Honorable mention among roughly 300 participants.</p>
+          <p>Honorable mention, top 4 of roughly 300 participants.</p>
         </div>
       </li>
       <li class="reveal">
@@ -126,55 +135,68 @@
       <a class="project reveal" href="https://github.com/s-k-28/relay" target="_blank" rel="noopener">
         <span class="project-idx">relay</span>
         <h3>Relay</h3>
-        <p>The project that took first at AICOO. Built fast, judged against 100 hackers, held up.</p>
+        <p>A network where your AI agent answers for you and only escalates when it cannot handle something itself.</p>
+        <span class="project-tags">Agents<span class="tag-sep">/</span>Orchestration<span class="tag-sep">/</span>LLM</span>
+        <span class="project-meta"><span class="project-award">1st, AICOO Hackathon</span></span>
         <span class="project-link">github.com/s-k-28/relay</span>
       </a>
       <a class="project reveal" href="https://github.com/s-k-28/hive" target="_blank" rel="noopener">
         <span class="project-idx">hive</span>
         <h3>HIVE</h3>
-        <p>First-place build at the InsForge hackathon. Shipped end to end in one sitting.</p>
+        <p>Hand a goal to a swarm of AI agents living inside InsForge. They plan, build, self-review, and ship.</p>
+        <span class="project-tags">Multi-agent<span class="tag-sep">/</span>InsForge<span class="tag-sep">/</span>LLM</span>
+        <span class="project-meta"><span class="project-award">1st, InsForge Hackathon</span></span>
         <span class="project-link">github.com/s-k-28/hive</span>
       </a>
       <a class="project reveal" href="https://github.com/s-k-28/nq-es-trader-5k-payout" target="_blank" rel="noopener">
-        <span class="project-idx">nq-es</span>
-        <h3>NQ Trader</h3>
-        <p>Systematic futures trading on NQ and ES. Real rules, real risk, real payouts.</p>
+        <span class="project-idx">quantx</span>
+        <h3>QuantX / NQ Trader</h3>
+        <p>A 12-model futures ensemble with walk-forward validation. The index-options system backtests at 173% annualized, 10.28 Sharpe.</p>
+        <span class="project-tags">Python<span class="tag-sep">/</span>Ensemble<span class="tag-sep">/</span>Walk-forward</span>
         <span class="project-link">github.com/s-k-28/nq-es-trader-5k-payout</span>
       </a>
       <a class="project reveal" href="https://github.com/s-k-28" target="_blank" rel="noopener">
         <span class="project-idx">signal</span>
         <h3>SignalForge</h3>
-        <p>Signal research tooling for testing ideas before capital ever touches them.</p>
+        <p>Plain-English investment thesis in, validated walk-forward-backtested signal out.</p>
+        <span class="project-tags">FastAPI<span class="tag-sep">/</span>Postgres<span class="tag-sep">/</span>Redis<span class="tag-sep">/</span>Next.js</span>
         <span class="project-link">github.com/s-k-28</span>
       </a>
       <a class="project reveal" href="https://github.com/s-k-28" target="_blank" rel="noopener">
         <span class="project-idx">radia</span>
         <h3>Radia</h3>
-        <p>AI skin analysis for iOS. Live on TestFlight with real users on real skin.</p>
+        <p>AI skin-analysis iOS app, live on TestFlight with App Store submission in progress.</p>
+        <span class="project-tags">SwiftUI<span class="tag-sep">/</span>iOS<span class="tag-sep">/</span>Vision</span>
+        <span class="project-meta"><span class="project-status-tag">Live on TestFlight</span></span>
         <span class="project-link">github.com/s-k-28</span>
       </a>
       <a class="project reveal" href="https://github.com/s-k-28" target="_blank" rel="noopener">
         <span class="project-idx">hale</span>
         <h3>Hale</h3>
-        <p>A nicotine cessation app. Habit science, not guilt trips.</p>
+        <p>A cross-platform quit-nicotine app with an AI coach and social accountability on a realtime backend.</p>
+        <span class="project-tags">React Native<span class="tag-sep">/</span>Convex<span class="tag-sep">/</span>RevenueCat</span>
         <span class="project-link">github.com/s-k-28</span>
       </a>
       <a class="project reveal" href="https://github.com/s-k-28" target="_blank" rel="noopener">
         <span class="project-idx">lantern</span>
         <h3>Lantern</h3>
-        <p>Duolingo for dying languages. Keeping small languages alive one lesson at a time.</p>
+        <p>Duolingo for dying languages, with an in-code anti-hallucination guardrail. Zero fabrications, 100/100/100 Lighthouse.</p>
+        <span class="project-tags">Web<span class="tag-sep">/</span>Guardrails<span class="tag-sep">/</span>i18n</span>
         <span class="project-link">github.com/s-k-28</span>
       </a>
-      <a class="project reveal" href="https://github.com/s-k-28" target="_blank" rel="noopener">
+      <a class="project reveal" href="https://github.com/s-k-28/euphoria-quest-forge" target="_blank" rel="noopener">
         <span class="project-idx">euphoria</span>
         <h3>Euphoria</h3>
-        <p>Investment education built for teens. 350+ on the waitlist before launch.</p>
-        <span class="project-link">github.com/s-k-28</span>
+        <p>Gamified investing education for teens, with pilot school partnerships in progress.</p>
+        <span class="project-tags">Web<span class="tag-sep">/</span>EdTech<span class="tag-sep">/</span>Fintech</span>
+        <span class="project-meta"><span class="project-status-tag">Near 1,000 waitlist</span></span>
+        <span class="project-link">github.com/s-k-28/euphoria-quest-forge</span>
       </a>
       <a class="project reveal" href="https://github.com/s-k-28/decoded" target="_blank" rel="noopener">
         <span class="project-idx">decoded</span>
         <h3>Decoded</h3>
-        <p>Open source and on GitHub, like everything else I ship.</p>
+        <p>Dense legal contracts turned into plain English, with serverless parsing and speech synthesis.</p>
+        <span class="project-tags">Serverless<span class="tag-sep">/</span>NLP<span class="tag-sep">/</span>TTS</span>
         <span class="project-link">github.com/s-k-28/decoded</span>
       </a>
     </div>
@@ -213,7 +235,21 @@
           <h3>Euphoria</h3>
           <span class="work-title">Co-founder</span>
         </div>
-        <p>Investment education for teens, by a teen. 350+ people signed up before we launched.</p>
+        <p>Investing education for teens, by a teen. Near 1,000 people on the waitlist and pilot school partnerships in progress.</p>
+      </article>
+      <article class="work-item reveal">
+        <div class="work-role">
+          <h3>Radia</h3>
+          <span class="work-title">Founder, iOS</span>
+        </div>
+        <p>Built the AI skin-analysis app end to end in SwiftUI, from the model pipeline to a TestFlight release.</p>
+      </article>
+      <article class="work-item reveal">
+        <div class="work-role">
+          <h3>Hale</h3>
+          <span class="work-title">Founder, Mobile</span>
+        </div>
+        <p>Cross-platform quit-nicotine app on a Convex realtime backend, wired to RevenueCat, OneSignal, PostHog, and Sentry.</p>
       </article>
     </div>
   </section>
@@ -228,6 +264,7 @@
     <div class="contact-links reveal">
       <a href="mailto:siddarthakodithyala28@gmail.com" class="contact-link">siddarthakodithyala28@gmail.com</a>
       <a href="https://github.com/s-k-28" target="_blank" rel="noopener" class="contact-link">github.com/s-k-28</a>
+      <a href="https://x.com/SiddarthaK64160" target="_blank" rel="noopener" class="contact-link">x.com/SiddarthaK64160</a>
     </div>
     <div class="footer-bar reveal">
       <span>Siddartha Kodithyala</span>
@@ -238,20 +275,51 @@
 
   <script>
     (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Scroll reveals
       var els = document.querySelectorAll('.reveal');
       if (!('IntersectionObserver' in window)) {
         els.forEach(function (el) { el.classList.add('in'); });
-        return;
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (el) { io.observe(el); });
       }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('in');
-            io.unobserve(e.target);
-          }
+
+      // Scroll progress accent + active nav link
+      var bar = document.getElementById('scroll-bar');
+      var sections = [].slice.call(document.querySelectorAll('section[id], header[id]'));
+      var navLinks = [].slice.call(document.querySelectorAll('.nav-links a'));
+      var ticking = false;
+
+      function update() {
+        ticking = false;
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - doc.clientHeight;
+        if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? doc.scrollTop / max : 0) + ')';
+
+        var mid = doc.scrollTop + doc.clientHeight * 0.32;
+        var current = '';
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].offsetTop <= mid) current = sections[i].id;
+        }
+        navLinks.forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + current);
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-      els.forEach(function (el) { io.observe(el); });
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
     })();
   </script>
 </body>

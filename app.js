@@ -1,59 +1,80 @@
 (function () {
   "use strict";
 
-  /* Theme toggle (light default, persisted) */
   var root = document.documentElement;
-  var toggle = document.getElementById("theme-toggle");
-  var stored = null;
-  try { stored = localStorage.getItem("theme"); } catch (e) {}
-  if (stored === "dark") root.setAttribute("data-theme", "dark");
 
+  // Theme toggle: toggle "dark" class on <html>, persisted in localStorage.
+  var toggle = document.getElementById("theme-toggle");
   if (toggle) {
     toggle.addEventListener("click", function () {
-      var dark = root.getAttribute("data-theme") === "dark";
-      if (dark) {
-        root.removeAttribute("data-theme");
-        try { localStorage.setItem("theme", "light"); } catch (e) {}
+      var isDark = root.classList.toggle("dark");
+      try {
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      } catch (e) {}
+    });
+  }
+
+  // Filter pills + search.
+  var pills = document.querySelectorAll("#filter-pills button");
+  var cards = document.querySelectorAll("#card-grid > [data-category]");
+  var noResults = document.getElementById("no-results");
+  var searchToggle = document.getElementById("search-toggle");
+  var searchWrap = document.getElementById("search-wrap");
+  var searchInput = document.getElementById("search-input");
+
+  var activeFilter = "everything";
+  var query = "";
+
+  var ACTIVE = ["bg-foreground", "text-background"];
+  var INACTIVE = ["text-muted-foreground", "hover:text-foreground"];
+
+  function setActivePill(target) {
+    pills.forEach(function (p) {
+      if (p === target) {
+        p.classList.remove.apply(p.classList, INACTIVE);
+        p.classList.add.apply(p.classList, ACTIVE);
       } else {
-        root.setAttribute("data-theme", "dark");
-        try { localStorage.setItem("theme", "dark"); } catch (e) {}
+        p.classList.remove.apply(p.classList, ACTIVE);
+        p.classList.add.apply(p.classList, INACTIVE);
       }
     });
   }
 
-  /* Filter + search */
-  var pills = [].slice.call(document.querySelectorAll(".fpill"));
-  var cards = [].slice.call(document.querySelectorAll(".card"));
-  var search = document.getElementById("search");
-  var empty = document.getElementById("empty");
-  var activeFilter = "everything";
-
   function apply() {
-    var q = (search && search.value ? search.value : "").trim().toLowerCase();
     var shown = 0;
     cards.forEach(function (card) {
-      var cat = card.getAttribute("data-cat");
-      var matchCat = activeFilter === "everything" || cat === activeFilter;
-      var matchText = !q || card.textContent.toLowerCase().indexOf(q) !== -1;
-      var show = matchCat && matchText;
-      card.style.display = show ? "" : "none";
-      if (show) shown++;
+      var cat = card.getAttribute("data-category") || "";
+      var text = card.getAttribute("data-text") || "";
+      var matchFilter = activeFilter === "everything" || cat === activeFilter;
+      var matchQuery = query === "" || text.indexOf(query) !== -1;
+      if (matchFilter && matchQuery) {
+        card.hidden = false;
+        shown++;
+      } else {
+        card.hidden = true;
+      }
     });
-    if (empty) empty.hidden = shown !== 0;
+    if (noResults) noResults.hidden = shown !== 0;
   }
 
   pills.forEach(function (pill) {
     pill.addEventListener("click", function () {
-      pills.forEach(function (p) {
-        p.classList.remove("fpill-active");
-        p.setAttribute("aria-selected", "false");
-      });
-      pill.classList.add("fpill-active");
-      pill.setAttribute("aria-selected", "true");
-      activeFilter = pill.getAttribute("data-filter");
+      activeFilter = pill.getAttribute("data-filter") || "everything";
+      setActivePill(pill);
       apply();
     });
   });
 
-  if (search) search.addEventListener("input", apply);
+  if (searchToggle && searchWrap && searchInput) {
+    searchToggle.addEventListener("click", function () {
+      searchWrap.hidden = !searchWrap.hidden;
+      if (!searchWrap.hidden) searchInput.focus();
+    });
+    searchInput.addEventListener("input", function () {
+      query = searchInput.value.trim().toLowerCase();
+      apply();
+    });
+  }
+
+  apply();
 })();

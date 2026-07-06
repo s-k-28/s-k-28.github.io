@@ -71,6 +71,9 @@
     pill.addEventListener("click", function () {
       activeFilter = pill.getAttribute("data-filter") || "everything";
       setActivePill(pill);
+      // A pill only makes sense against the card grid, so make sure it is shown
+      // (in case the research or gallery view was open) and clear the nav pill.
+      showGridView();
       apply();
     });
   });
@@ -80,13 +83,41 @@
   var navTabs = document.querySelectorAll("#nav-tabs button");
   var grid = document.getElementById("card-grid");
 
-  // nav value -> filter applied to the card grid.
+  // Distinct nav views: the plain card grid, the publications list, the gallery.
+  var gridView = document.getElementById("grid-view");
+  var researchView = document.getElementById("research-view");
+  var galleryView = document.getElementById("gallery-view");
+
+  // nav value -> filter applied to the card grid (used only in grid views).
   var NAV_FILTER = {
     about: "everything",
     experiences: "work",
     research: "research",
     gallery: "everything"
   };
+
+  // Show one of the three views. "research" and "gallery" reveal their own
+  // sections and hide the plain grid; everything else shows the grid.
+  function setView(nav) {
+    var showResearch = nav === "research";
+    var showGallery = nav === "gallery";
+    if (researchView) researchView.hidden = !showResearch;
+    if (galleryView) galleryView.hidden = !showGallery;
+    if (gridView) gridView.hidden = showResearch || showGallery;
+  }
+
+  // Reveal the plain card grid and clear any active nav tab. Used when a filter
+  // pill is clicked while the research or gallery view is open.
+  function showGridView() {
+    if (researchView) researchView.hidden = true;
+    if (galleryView) galleryView.hidden = true;
+    if (gridView) gridView.hidden = false;
+    navTabs.forEach(function (t) {
+      t.classList.remove("bg-foreground", "text-background", "font-medium");
+      t.classList.add("text-muted-foreground", "hover:text-foreground");
+      t.removeAttribute("aria-current");
+    });
+  }
 
   function setActiveNav(target) {
     navTabs.forEach(function (t) {
@@ -114,13 +145,24 @@
       var nav = tab.getAttribute("data-nav") || "about";
       activeFilter = NAV_FILTER[nav] || "everything";
       setActiveNav(tab);
+      setView(nav);
+      // Keep the grid filter state in sync so returning to a grid view is correct.
       syncPillTo(activeFilter);
       apply();
-      if (nav !== "about" && grid) {
-        grid.scrollIntoView({
-          behavior: reduceMotion() ? "auto" : "smooth",
-          block: "start"
-        });
+      // Scroll to whichever section is now visible (all but "about").
+      if (nav !== "about") {
+        var target =
+          nav === "research"
+            ? researchView
+            : nav === "gallery"
+            ? galleryView
+            : grid;
+        if (target) {
+          target.scrollIntoView({
+            behavior: reduceMotion() ? "auto" : "smooth",
+            block: "start"
+          });
+        }
       }
     });
   });

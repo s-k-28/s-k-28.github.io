@@ -69,8 +69,25 @@
 
   pills.forEach(function (pill) {
     pill.addEventListener("click", function () {
-      activeFilter = pill.getAttribute("data-filter") || "everything";
+      var filter = pill.getAttribute("data-filter") || "everything";
       setActivePill(pill);
+      // Work history lives in the experiences timeline, not the card grid, so
+      // the "work" pill opens that timeline instead of filtering to one card.
+      if (filter === "work") {
+        var expTab = document.querySelector(
+          '#nav-tabs button[data-nav="experiences"]'
+        );
+        if (expTab) setActiveNav(expTab);
+        setView("experiences");
+        if (experiencesView) {
+          experiencesView.scrollIntoView({
+            behavior: reduceMotion() ? "auto" : "smooth",
+            block: "start"
+          });
+        }
+        return;
+      }
+      activeFilter = filter;
       // A pill only makes sense against the card grid, so make sure it is shown
       // (in case the research or gallery view was open) and clear the nav pill.
       showGridView();
